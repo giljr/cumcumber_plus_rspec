@@ -1,0 +1,57 @@
+<h1>Listing Todos</h1>
+
+<h2>Completed Tasks</h2>
+<section id="completed-tasks" class="completed-tasks">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Note</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @todos.where(done: true).each do |todo| %>
+        <tr>
+          <td>true</td>
+          <td><%= todo.note %></td>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+          <td>
+            <%= link_to 'Delete', todo, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+
+<h2>Not Completed Tasks</h2>
+<section id="not-completed-tasks" class="not-completed-tasks">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Note</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @todos.where(done: false).each do |todo| %>
+        <tr>
+          <td>false</td>
+          <td><%= todo.note %></td>
+          <td><%= link_to 'Show', todo %></td>
+          <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+          <td>
+            <%= link_to 'Delete', todo, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</section>
+<br>
+<%= link_to 'New Task', new_todo_path, class: 'btn btn-primary' %>
